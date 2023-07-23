@@ -51,12 +51,12 @@ public class GameSettings : MonoBehaviour
         }
     }
 
-    [SerializeField] private float playerAttackSpeed;
-    public float PlayerAttackSpeed
+    [SerializeField] private float playerAttackTimeout;
+    public float PlayerAttackTimeout
     {
         get
         {
-            return playerAttackSpeed;
+            return playerAttackTimeout;
         }
     }
 
