@@ -10,9 +10,18 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private Transform rightBorder;
     [SerializeField] private Transform topBorder;
     [SerializeField] private Transform bottomBorder;
+    private bool isActive = false;
+
+    public void SetActive(bool active)
+    {
+        isActive = active;
+    }
 
     private void Update()
     {
+        if (!isActive)
+            return;
+
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 

@@ -6,7 +6,7 @@ public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] private GameObject bulletInstance;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private EnemyManager enemySpawner;
 
     private float attackRadius;
     private float attackTimeout;

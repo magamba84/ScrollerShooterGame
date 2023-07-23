@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
+    [SerializeField] private int playerStartHp;
+    public int PlayerStartHp 
+    {
+        get
+        {
+            return playerStartHp;
+        }
+    }
 
     [SerializeField] private IntRange enemyCountRange;
     public IntRange EnemyCountRange

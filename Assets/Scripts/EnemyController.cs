@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     private Transform border;
 
     public event Action<EnemyController> Destroyed;
+    public event Action<EnemyController> Killed;
+    public event Action<EnemyController> HitPlayer;
 
     public void Init(Transform border) 
     {
@@ -32,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
         if (transform.position.y <= border.position.y)
         {
+            HitPlayer?.Invoke(this);
             Die();
         }
     }
@@ -40,7 +43,11 @@ public class EnemyController : MonoBehaviour
     {
         hp -= damage;
         if (hp <= 0)
+        {
+            Killed?.Invoke(this);
             Die();
+        }
+            
     }
 
     private void Die()
