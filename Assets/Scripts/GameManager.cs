@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] EnemyManager enemyManager;
-    [SerializeField] PlayerMoveController playerMoveController;
+    [SerializeField] private EnemyManager enemyManager;
+    [SerializeField] private PlayerMoveController playerMoveController;
+    [SerializeField] private UIController uiController;
 
     private int playerHp;
     private int scoreToWin;
@@ -15,19 +16,21 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         var settings = GameSettings.Instance;
         playerHp = settings.PlayerStartHp;
         scoreToWin = Random.Range(settings.EnemyCountRange.min, settings.EnemyCountRange.max);
         enemyManager.StartSpawn();
         playerMoveController.SetActive(true);
+        uiController.ShowHP(playerHp);
     }
 
     private void EndGame(bool win)
     {
         enemyManager.StopSpawn();
         playerMoveController.SetActive(false);
+        uiController.ShowEndGame(win);
     }
 
     public void EnemyKilled()
@@ -40,10 +43,9 @@ public class GameManager : MonoBehaviour
     public void HitPlayer()
     {
         playerHp--;
+        uiController.ShowHP(playerHp);
         if (playerHp <= 0)
             EndGame(false);
     }
 
-   
-    
 }

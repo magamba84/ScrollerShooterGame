@@ -5,9 +5,10 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
     [SerializeField] private GameObject EnemyInstance;
+    [SerializeField] private Transform SpawnParent;
 
     public GameObject CreateEnemy()
     {
-        return Instantiate(EnemyInstance);
+        return Instantiate(EnemyInstance, SpawnParent);
     }
 }
