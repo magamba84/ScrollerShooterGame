@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,10 +12,13 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private GameObject explosion;
 
-    [SerializeField] private Transform border;
+    private Transform border;
 
-    private void Start() 
-    { 
+    public event Action<EnemyController> Destroyed;
+
+    public void Init(Transform border) 
+    {
+        this.border = border;
         var settings = GameSettings.Instance;
         moveSpeed = Random.Range(settings.EnemyMovementSpeedRange.min, settings.EnemyMovementSpeedRange.max);
         hp = settings.EnemyHp;
@@ -42,6 +47,9 @@ public class EnemyController : MonoBehaviour
     { 
         var exp = Instantiate(explosion,transform.parent);
         exp.transform.position = transform.position;
+
+        Destroyed?.Invoke(this);
+
         Destroy(gameObject);
     }
 }

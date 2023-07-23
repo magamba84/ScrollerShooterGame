@@ -6,7 +6,8 @@ public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] private GameObject bulletInstance;
     [SerializeField] private Transform bulletSpawnPoint;
-    public List<Transform> enemies;
+    [SerializeField] private EnemySpawner enemySpawner;
+
     private float attackRadius;
     private float attackTimeout;
     private float bulletSpeed;
@@ -52,6 +53,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private Transform FindAim()
     {
+        var enemies = enemySpawner.GetEnemiesList();
         if (enemies.Count == 0)
             return null;
 
@@ -59,11 +61,11 @@ public class PlayerAttackController : MonoBehaviour
         float minRange = float.MaxValue;
         foreach (var e in enemies)
         {
-            var range = (e.position - transform.position).magnitude;
+            var range = (e.transform.position - transform.position).magnitude;
             if (range <= attackRadius && range < minRange)
             {
                 minRange = range;
-                closest = e;
+                closest = e.transform;
             }
         }
         return closest;

@@ -70,8 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletInstance: {fileID: 6945920850450163405, guid: 9b58585b72c8d5f4eb370f0750073ea1, type: 3}
   bulletSpawnPoint: {fileID: 7186594218326038233}
-  enemies:
-  - {fileID: 0}
+  enemySpawner: {fileID: 0}
 --- !u!1 &1113099439047700093
 GameObject:
   m_ObjectHideFlags: 0
